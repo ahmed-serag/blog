@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog | Home</title>
+    <!-- Bootstrap -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Blog</a>
+                </div>
+              
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/writePost"><span class="glyphicon glyphicon-edit"></span> write post</a></li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-off"></span>
+                            logout
+                        </a>
+                        
+                    </li> 
+                </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-md-8"> 
+                            <h1><strong>Welcom to your Blog!</strong></h1>
+                        </div>     
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <p>“The more that you read, the more things you will know. The more that you learn, the more places you'll go.”</p>
+                       
+                    </div>
+                    
+                  
+                </div>
+
+            </div>
+        </div>
+        {% for post in posts %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-md-4"> 
+                            <p><strong> {{post.user}} </strong></p>
+                        </div>
+                        <div class="col-md-4 col-md-offset-4 text-right">
+                            {{post.created}}
+                        </div>
+                         
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.body }}</p>
+                        <p><a  href="#" >view post...</a></p>
+                    </div>
+                    <!-- hr>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-8 text-right">
+                            <ul class="list-inline">
+                            <li><p><a class="liked">10 <span class="glyphicon glyphicon-thumbs-up"></span></a></p></li>
+                            <li><p><a class="disliked">5 <span class="glyphicon glyphicon-thumbs-down"></span></a></p></li> 
+                            </ul>
+                          
+                        </div>
+                    </div -->
+                    
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+      
+            
+            
+        </div>
+
+    </div>
+
+
+
+    <!-- jQuery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>
