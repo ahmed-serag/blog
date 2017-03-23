@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blog | Home</title>
+    <title>Blog | post</title>
     <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-
+     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
   </head>
   <body>
         <nav class="navbar navbar-default">
@@ -20,19 +19,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Blog</a>
+                <a class="navbar-brand" href="../blog">Blog</a>
                 </div>
               
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-edit"></span> write post</a></li>
+                    <li><a href="../writePost"><span class="glyphicon glyphicon-edit"></span> write post</a></li>
                     <li>
-                        <a href="#">
+                        <a href="../logout">
                             <span class="glyphicon glyphicon-off"></span>
                             logout
                         </a>
-                        
                     </li> 
                 </ul>
                 </div><!-- /.navbar-collapse -->
@@ -45,66 +43,69 @@
                 <div class="jumbotron">
                     <div class="row">
                         <div class="col-md-4"> 
-                            <p><strong>Ahmed Serag </strong></p>
+                            <p><strong>{{ post.user }} </strong></p>
                         </div>
                         <div class="col-md-4 col-md-offset-4 text-right">
-                            12/7/2013
+                            {{ post.created }}
                         </div>                        
                     </div>
                     <hr>
                     <div class="row">
                          <div class="col-md-12">
-                            <h3>Blog Title</h3>
-                            <p>Body Body Body Body Body Body Body Body Body Body Body </p>
+                            <h3>{{ post.title }}</h3>
+                            <p> {{ post.body }} </p>
                          </div>
                     </div>
                     <hr>
                     <div class="col-md-4 col-md-offset-8 text-right">
                         <ul class="list-inline">
+                        {% if user.username != post.user %}
+                                        
+                        <li><p><a href="{{'../like/%s,%s'%(post_id,1)}}" class="liked">{{likes}} <span class="glyphicon glyphicon-thumbs-up"></span></a></p></li>
+                        <li><p><a href="{{'../like/%s,%s'%(post_id,0)}}" class="disliked">{{dislikes}} <span class="glyphicon glyphicon-thumbs-down"></span></a></p></li> 
+                        {% else %}
                         <li><p><a class="liked">10 <span class="glyphicon glyphicon-thumbs-up"></span></a></p></li>
                         <li><p><a class="disliked">5 <span class="glyphicon glyphicon-thumbs-down"></span></a></p></li> 
+                        {% endif %}
                         </ul>
                     </div>
                     <ul class="nav">
-                        <li>
-                            <div class="page-header">
-                                <h3>Example page header</h3>
-                                <small>Subtext for header Subtext for header Subtext for header Subtext for header Subtext for headerSubtext for header</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="page-header">
-                                <h3>Example page header</h3>
-                                <small>Subtext for header Subtext for header Subtext for header Subtext for header Subtext for headerSubtext for header</small>
-                            </div>
-                        </li>   
+                        {% if comments %}
+                            {% for comment in comments %}
+                            <li>
+                                <div class="page-header">
+                                    <h3>{{ comment.user }}</h3>
+                                    <small> {{ comment.body }} </small>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        {% endif %}                        
                     </ul>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="input-group">
-                            <input type="text" class="form-control" placeholder="write your comment...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default comment-btn" type="button">add a Comment</button>
-                            </span>
-                            </div><!-- /input-group -->
-                        </div><!-- /.col-lg-6 -->
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                <input type="text" class="form-control" name="body" placeholder="write your comment...">
+                                <input type="hidden" class="form-control" name="user" value="{{user.username}}">
+                                <input type="hidden" class="form-control" name="post" value="{{post_id}}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default comment-btn" type="submit">add a Comment</button>
+                                </span>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
                         </div><!-- /.row -->
+                    <form>
                 </div>
 
             </div>
         </div>
     
-      
-            
-            
         </div>
 
     </div>
 
-
-
     <!-- jQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
   </body>
 </html>

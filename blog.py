@@ -6,9 +6,8 @@ from user import User
 class Blog(Handler):
     def get(self):
         if self.read_secure_cookie('user_id'):
-            posts = Post.all()
+            posts = Post.all().order('-created')
             user = User.by_id(self.read_secure_cookie('user_id'))
             self.render('home.html',posts = posts, user = user)
         else:
             self.redirect('/')
-        
