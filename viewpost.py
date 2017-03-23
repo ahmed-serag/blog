@@ -4,7 +4,7 @@ from post import Post
 from comment import Comment
 from like import Like
 class ViewPost(Handler):
-    def post(self, post_id=None):
+    def post(self, post_param=None):
         if self.read_secure_cookie('user_id'):
             user = self.request.get('user')
             post = self.request.get('post')
@@ -17,7 +17,7 @@ class ViewPost(Handler):
 
     def get(self, post_id=None):
         if self.read_secure_cookie('user_id'):
-            if post_id:
+            if post_id and Post.by_id(int(post_id)):
                 post = Post.by_id(int(post_id))
                 comments = Comment.by_post(post_id)
                 likes = Like.by_post(post_id)
@@ -32,6 +32,6 @@ class ViewPost(Handler):
                 user = User.by_id(self.read_secure_cookie('user_id'))
                 self.render('post.html', post = post, comments = comments, likes = likes_num, dislikes = dislikes_num, user = user, post_id=post_id)
             else:
-                self.redirect('blog')
+                self.redirect('/')
         else:
             self.redirect('/')

@@ -9,6 +9,7 @@ from writepost import WritePost
 from viewpost import ViewPost
 from logout import LogOut
 from like import LikeHandler
+from post import postDeleteHandler
 
 """
 app object 
@@ -20,6 +21,7 @@ app = webapp2.WSGIApplication([
     ('/blog',Blog),
     ('/writePost',WritePost),
     ('/post/([0-9]+)',ViewPost),
+    ('/deletepost/([0-9]+)',postDeleteHandler),
      ('/post',ViewPost),
       ('/*', MainPage)
 ], debug=True)

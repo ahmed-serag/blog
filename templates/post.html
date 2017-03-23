@@ -43,7 +43,10 @@
                 <div class="jumbotron">
                     <div class="row">
                         <div class="col-md-4"> 
-                            <p><strong>{{ post.user }} </strong></p>
+                            <p style="font-size: xx-large;"><strong>{{ post.user }} </strong></p>
+                            {% if user.username == post.user %}
+                            <a class="liked" href="{{'../deletepost/%s'%(post_id)}}" style="padding: 5px;"> <span class="glyphicon glyphicon-trash"></span></a>
+                            {% endif %}
                         </div>
                         <div class="col-md-4 col-md-offset-4 text-right">
                             {{ post.created }}
@@ -60,12 +63,11 @@
                     <div class="col-md-4 col-md-offset-8 text-right">
                         <ul class="list-inline">
                         {% if user.username != post.user %}
-                                        
                         <li><p><a href="{{'../like/%s,%s'%(post_id,1)}}" class="liked">{{likes}} <span class="glyphicon glyphicon-thumbs-up"></span></a></p></li>
                         <li><p><a href="{{'../like/%s,%s'%(post_id,0)}}" class="disliked">{{dislikes}} <span class="glyphicon glyphicon-thumbs-down"></span></a></p></li> 
                         {% else %}
-                        <li><p><a class="liked">10 <span class="glyphicon glyphicon-thumbs-up"></span></a></p></li>
-                        <li><p><a class="disliked">5 <span class="glyphicon glyphicon-thumbs-down"></span></a></p></li> 
+                        <li><p><a class="liked">{{likes}} <span class="glyphicon glyphicon-thumbs-up"></span></a></p></li>
+                        <li><p><a class="disliked">{{dislikes}} <span class="glyphicon glyphicon-thumbs-down"></span></a></p></li> 
                         {% endif %}
                         </ul>
                     </div>
