@@ -4,6 +4,9 @@ from like import Like
 from comment import Comment
 from user import User
 class Blog(Handler):
+    '''
+    this class is responsible for handling the requests for the main page
+    '''
     def get(self):
         if self.read_secure_cookie('user_id'):
             posts = Post.all().order('-created')

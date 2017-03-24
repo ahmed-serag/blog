@@ -4,6 +4,9 @@ from post import Post
 from comment import Comment
 from like import Like
 class ViewPost(Handler):
+    '''
+    this class handle requests to view the post and it's comments and likes
+    '''
     def post(self, post_param=None):
         if self.read_secure_cookie('user_id'):
             user = self.request.get('user')
@@ -16,7 +19,7 @@ class ViewPost(Handler):
             self.redirect('/')
 
     def get(self, post_id=None):
-        if self.read_secure_cookie('user_id'):
+        if self.read_secure_cookie('usere _id'):
             if post_id and Post.by_id(int(post_id)):
                 post = Post.by_id(int(post_id))
                 comments = Comment.by_post(post_id)

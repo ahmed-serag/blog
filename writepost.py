@@ -2,6 +2,9 @@ from handler import Handler
 from user import  User
 from post import Post
 class WritePost(Handler):
+    '''
+    this class is responsible for handling requests for new posts
+    '''
     def post(self):
         if self.read_secure_cookie('user_id'):
             user = self.request.get('user')

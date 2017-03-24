@@ -22,7 +22,7 @@ def check_secure_val(secure_val):
 
 class Handler(webapp2.RequestHandler):
     """
-     docs
+     this class handels the responses of http requests
     """ 
     def write(self ,*a ,**kw):
 

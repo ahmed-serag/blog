@@ -1,6 +1,10 @@
 from google.appengine.ext import db
 from handler import Handler
+
 class Like(db.Model):
+    '''
+    this is the model class for likes
+    '''
     user = db.StringProperty(required = True)
     post = db.StringProperty( required = True)
     value = db.IntegerProperty( required = True)
@@ -21,6 +25,9 @@ class Like(db.Model):
 
 
 class LikeHandler(Handler):
+    '''
+    this class handel the requests for likes and dislikes
+    '''
     def get(self,value=None):
 
         if self.read_secure_cookie('user_id'):

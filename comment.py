@@ -1,6 +1,9 @@
 from google.appengine.ext import db
 
 class Comment(db.Model):
+    '''
+    this is the model class for Comments
+    '''
     user = db.StringProperty(required = True)
     post = db.StringProperty( required = True)
     body = db.TextProperty( required = True)

@@ -4,6 +4,9 @@ from user import User
 from comment import Comment
 from like import Like
 class Post(db.Model):
+    '''
+    thi is the post model
+    '''
     user = db.StringProperty(required = True)
     title = db.StringProperty( required = True)
     body = db.TextProperty( required = True)
@@ -15,6 +18,9 @@ class Post(db.Model):
         return Post.get_by_id(int(uid))
 
 class postDeleteHandler(Handler):
+    '''
+    this handler is  for handel delete post requests and it's likes and comments from the datastore 
+    '''
     def get(self,post_id):
         if self.read_secure_cookie('user_id'):
             post = Post.by_id(post_id)
