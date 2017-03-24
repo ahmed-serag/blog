@@ -19,7 +19,7 @@ class ViewPost(Handler):
             self.redirect('/')
 
     def get(self, post_id=None):
-        if self.read_secure_cookie('usere _id'):
+        if self.read_secure_cookie('user_id'):
             if post_id and Post.by_id(int(post_id)):
                 post = Post.by_id(int(post_id))
                 comments = Comment.by_post(post_id)

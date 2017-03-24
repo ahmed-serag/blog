@@ -12,7 +12,6 @@ class Post(db.Model):
     body = db.TextProperty( required = True)
     created = db.DateTimeProperty(auto_now_add = True)
 
-
     @classmethod
     def by_id(cls, uid):
         return Post.get_by_id(int(uid))
@@ -30,17 +29,10 @@ class postDeleteHandler(Handler):
                     if Comment.by_post(post_id).get():
                         for comment in Comment.by_post(post_id):
                             comment.delete()
-
                     if Like.by_post(post_id).get():
                         for like in Like.by_post(post_id):
-                            like.delete()
-
-
-                    
+                            like.delete()                    
             self.redirect('/blog')
             
         else:
             self.redirect('/')
-
-        
-        

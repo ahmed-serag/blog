@@ -20,30 +20,31 @@ class MainPage(Handler):
     handels some project main functionalities(signin, signup)
     """
     def post(self):
-        username= self.request.get('username')
-        password= self.request.get('password')
-        if(self.request.get('login')):
-            if(User.by_name(username)):
-                user = User.by_name(username)
-                salt = user.password.split(',')[0]
-                if(user.password == make_hash(username, password, salt)):
+        if self.read_secure_cookie('user_id'):
+            username= self.request.get('username')
+            password= self.request.get('password')
+            if(self.request.get('login')):
+                if(User.by_name(username)):
+                    user = User.by_name(username)
+                    salt = user.password.split(',')[0]
+                    if(user.password == make_hash(username, password, salt)):
+                        self.login(user)
+                        self.redirect('/blog')
+                    else:
+                        self.render("signin.html", error="wrong password")   
+                else:
+                    self.render("signin.html", error="User doesn't exist")
+            else:
+                if(User.by_name(username)):
+                    self.render("signin.html", error="User already exist")
+                else:
+                    password = make_hash(username, password)
+                    user = User(password=password, username=username)
+                    user.put()
                     self.login(user)
                     self.redirect('/blog')
-                else:
-                    self.render("signin.html", error="wrong password")
-                    
-            else:
-              self.render("signin.html", error="User doesn't exist")
-
         else:
-            if(User.by_name(username)):
-                self.render("signin.html", error="User already exist")
-            else:
-                password = make_hash(username, password)
-                user = User(password=password, username=username)
-                user.put()
-                self.login(user)
-                self.redirect('/blog')
+             self.redirect('/')
 
     def get(self):
         if self.read_secure_cookie('user_id'):

@@ -1,8 +1,7 @@
 from handler import Handler
 from post import Post
-from like import Like
-from comment import Comment
 from user import User
+
 class Blog(Handler):
     '''
     this class is responsible for handling the requests for the main page

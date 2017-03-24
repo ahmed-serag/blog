@@ -1,14 +1,13 @@
 """
 this module is responsibe for handling the app and request
 """
-
 import webapp2
 from mainpage import MainPage
 from blog import Blog
 from writepost import WritePost
 from viewpost import ViewPost
 from logout import LogOut
-from like import LikeHandler
+from likehandler import LikeHandler
 from post import postDeleteHandler
 
 """
@@ -22,8 +21,9 @@ app = webapp2.WSGIApplication([
     ('/writePost',WritePost),
     ('/post/([0-9]+)',ViewPost),
     ('/deletepost/([0-9]+)',postDeleteHandler),
-     ('/post',ViewPost),
-      ('/*', MainPage)
+    ('/editpost/([0-9]+)',WritePost),
+    ('/post',ViewPost),
+    ('/*', MainPage)
 ], debug=True)
 
 
