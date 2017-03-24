@@ -12,9 +12,10 @@ class ViewPost(Handler):
             user = self.request.get('user')
             post = self.request.get('post')
             body = self.request.get('body')
-            comment = Comment(user = user, body = body, post=post)
-            comment.put()
-            self.redirect('/post/%s'%post)       
+            if Post.by_id(int(post)) and User.by_name(user):
+                comment = Comment(user = user, body = body, post=post)
+                comment.put()
+                self.redirect('/post/%s'%post)
         else:
             self.redirect('/')
 
